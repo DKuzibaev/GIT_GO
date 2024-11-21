@@ -8,16 +8,32 @@ import (
 	"strings"
 )
 
+const IMTpower = 2
+
 func main() {
+
 	var helloMsg = "__Калькулятор индекса массы тела__\n"
 	fmt.Println(helloMsg)
 	var userHeight float64
 	var userWeigth float64
+	i := true
+	for i {
+		reader := bufio.NewReader(os.Stdin)
+		fmt.Println("Хотите произвести новый расчёт?(Y/N)")
+		userAnswer, _ := reader.ReadString('\n')
+		userAnswer = strings.TrimSpace(userAnswer)
 
-	userHeight, userWeigth = getUserInput()
-	IMT := calculateIMT(userWeigth, userHeight)
-	fmt.Println(outputResult(IMT))
-	checkIMTNorm(IMT)
+		if userAnswer == "n" || userAnswer == "N" {
+			fmt.Println("Хорошего дня!")
+			i = false
+			break
+		} else {
+			userHeight, userWeigth = getUserInput()
+			IMT := calculateIMT(userWeigth, userHeight)
+			fmt.Println(outputResult(IMT))
+			checkIMTNorm(IMT)
+		}
+	}
 }
 
 func waitForExit() {
@@ -31,7 +47,6 @@ func outputResult(IMT float64) string {
 }
 
 func calculateIMT(userWeigth, userHeight float64) float64 {
-	const IMTpower = 2
 	result := userWeigth / math.Pow(userHeight/100, IMTpower)
 	return result
 }

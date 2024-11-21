@@ -11,11 +11,10 @@ import (
 func main() {
 	fmt.Println("__Калькулятор индекса массы тела__\n")
 
-	const IMTpower = 2
 	var userHeight float64
 	var userWeigth float64
 
-	fmt.Println("Введите свой рост в метрах:")
+	fmt.Println("Введите свой рост в сантиметрах:")
 	_, err := fmt.Scanln(&userHeight)
 	if err != nil || userHeight <= 0 {
 		fmt.Println("Ошибка: Некорректный ввод роста.")
@@ -31,9 +30,28 @@ func main() {
 		return
 	}
 
-	IMT := userWeigth / math.Pow(userHeight, IMTpower)
-	fmt.Printf("Индекс массы тела равен: %.2f\n", IMT)
+	IMT := calculateIMT(userWeigth, userHeight)
+	fmt.Println(outputResult(IMT))
+	checkIMTNorm(IMT)
+}
 
+func waitForExit() {
+	fmt.Println("\nХорошего Дня...")
+	bufio.NewReader(os.Stdin).ReadString('\n')
+}
+
+func outputResult(IMT float64) string {
+	result := fmt.Sprintf("Индекс массы тела равен: %.2f\n", IMT)
+	return result
+}
+
+func calculateIMT(userWeigth, userHeight float64) float64 {
+	const IMTpower = 2
+	result := userWeigth / math.Pow(userHeight/100, IMTpower)
+	return result
+}
+
+func checkIMTNorm(IMT float64) {
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Println("Произвести расчёт индекса массы тела, который определяет в каком соотношении находятся вес и рост? (Y/N)")
 
@@ -57,11 +75,4 @@ func main() {
 	} else {
 		fmt.Println("Хорошего дня!")
 	}
-
-	waitForExit()
-}
-
-func waitForExit() {
-	fmt.Println("\nНажмите Enter для выхода...")
-	bufio.NewReader(os.Stdin).ReadString('\n')
 }

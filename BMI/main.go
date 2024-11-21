@@ -11,26 +11,10 @@ import (
 func main() {
 	var helloMsg = "__Калькулятор индекса массы тела__\n"
 	fmt.Println(helloMsg)
-
 	var userHeight float64
 	var userWeigth float64
 
-	fmt.Println("Введите свой рост в сантиметрах:")
-	_, err := fmt.Scanln(&userHeight)
-	if err != nil || userHeight <= 0 {
-		fmt.Println("Ошибка: Некорректный ввод роста.")
-		waitForExit()
-		return
-	}
-
-	fmt.Println("Введите свой вес:")
-	_, err = fmt.Scanln(&userWeigth)
-	if err != nil || userWeigth <= 0 {
-		fmt.Println("Ошибка: Некорректный ввод веса.")
-		waitForExit()
-		return
-	}
-
+	userHeight, userWeigth = getUserInput()
 	IMT := calculateIMT(userWeigth, userHeight)
 	fmt.Println(outputResult(IMT))
 	checkIMTNorm(IMT)
@@ -76,4 +60,27 @@ func checkIMTNorm(IMT float64) {
 	} else {
 		fmt.Println("Хорошего дня!")
 	}
+}
+
+func getUserInput() (float64, float64) {
+	var userHeight float64
+	var userWeigth float64
+
+	fmt.Println("Введите свой рост в сантиметрах:")
+	_, err := fmt.Scanln(&userHeight)
+	if err != nil || userHeight <= 0 {
+		fmt.Println("Ошибка: Некорректный ввод роста.")
+		waitForExit()
+		return 0.0, 0.0
+	}
+
+	fmt.Println("Введите свой вес:")
+	_, err = fmt.Scanln(&userWeigth)
+	if err != nil || userWeigth <= 0 {
+		fmt.Println("Ошибка: Некорректный ввод веса.")
+		waitForExit()
+		return 0.0, 0.0
+	}
+
+	return userHeight, userWeigth
 }

@@ -9,7 +9,8 @@ import (
 )
 
 func main() {
-	fmt.Println("__Калькулятор индекса массы тела__\n")
+	var helloMsg = "__Калькулятор индекса массы тела__\n"
+	fmt.Println(helloMsg)
 
 	var userHeight float64
 	var userWeigth float64

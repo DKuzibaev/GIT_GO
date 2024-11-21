@@ -30,7 +30,6 @@ func main() {
 
 func waitForExit() {
 	fmt.Println("\nХорошего Дня...")
-	//bufio.NewReader(os.Stdin).ReadString('\n')
 }
 
 func outputResult(IMT float64) string {

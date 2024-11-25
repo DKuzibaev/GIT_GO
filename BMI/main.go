@@ -65,17 +65,13 @@ func getUserInput() (float64, float64) {
 	fmt.Println("Введите свой рост в сантиметрах:")
 	_, err := fmt.Scanln(&userHeight)
 	if err != nil || userHeight <= 0 {
-		fmt.Println("Ошибка: Некорректный ввод роста.")
-		waitForExit()
-		return 0.0, 0.0
+		panic("Ошибка: Некорректный ввод роста.")
 	}
 
 	fmt.Println("Введите свой вес:")
 	_, err = fmt.Scanln(&userWeigth)
 	if err != nil || userWeigth <= 0 {
-		fmt.Println("Ошибка: Некорректный ввод веса.")
-		waitForExit()
-		return 0.0, 0.0
+		panic("Ошибка: Некорректный ввод веса.")
 	}
 
 	return userHeight, userWeigth

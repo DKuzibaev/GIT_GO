@@ -43,7 +43,7 @@ func calculateTransactions(transactions []float64) float64 {
 		for _, value := range transactions {
 			sum += value
 		}
-		fmt.Printf("Общая сумма равно: %2.f", sum)
+		fmt.Printf("Ваш баланс: %.2f", sum)
 	} else {
 		fmt.Println("Хорошего дня!")
 	}

@@ -3,23 +3,8 @@ package main
 import "fmt"
 
 func main() {
-	var sum float64
 	transactions := transactionsDataBase()
-	fmt.Println("Хотите узнать полную сумму транзакций? y/n")
-	var input string
-
-	fmt.Scan(&input)
-
-	if input == "y" || input == "Y" {
-
-		for _, value := range transactions {
-			sum += value
-		}
-
-		fmt.Println(sum)
-	} else {
-		fmt.Println("Хорошего дня!")
-	}
+	fmt.Println(calculateTransactions(transactions))
 
 }
 
@@ -43,4 +28,25 @@ func transactionsDataBase() []float64 {
 	}
 
 	return transactions
+}
+
+func calculateTransactions(transactions []float64) float64 {
+	fmt.Println("Хотите узнать полную сумму транзакций? y/n")
+
+	var input string
+	var sum float64
+
+	fmt.Scan(&input)
+
+	if input == "y" || input == "Y" {
+
+		for _, value := range transactions {
+			sum += value
+		}
+		fmt.Printf("Общая сумма равно: %2.f", sum)
+	} else {
+		fmt.Println("Хорошего дня!")
+	}
+
+	return sum
 }

@@ -18,6 +18,7 @@ func start() {
 	fmt.Printf("Компьютер выбрал %s\n", computerSelection)
 
 	fmt.Println(game(userChoice, computerSelection))
+
 }
 
 func choosingSubject() string {
@@ -56,13 +57,34 @@ func game(usV string, cpV string) string {
 	arr := [3]string{"Камень", "Ножницы", "Бумага"}
 
 	if usV == cpV {
+		oneMoreGame()
 		return "Ничья"
 	} else if usV == arr[0] && cpV == arr[1] {
+		oneMoreGame()
 		return ("Камень бьет Ножницы")
 	} else if (usV == arr[1] && cpV == arr[2]) || (usV == arr[2] && cpV == arr[1]) {
+		oneMoreGame()
 		return ("Ножницы бьют Бумагу")
 	} else if usV == arr[2] && cpV == arr[0] {
+		oneMoreGame()
 		return ("Бумага бьёт Камень")
+	} else {
+		panic("ooPs")
 	}
-	return "ooPs"
+}
+
+func oneMoreGame() {
+	fmt.Println("Хотите сыиграть еще раз?")
+	var rematch string
+	fmt.Scan(&rematch)
+
+	if rematch == "y" || rematch == "Y" {
+		userChoice := choosingSubject()
+		computerSelection := chooseComputerSelection()
+
+		fmt.Printf("Вы выбрали %s\n", userChoice)
+		fmt.Printf("Компьютер выбрал %s\n", computerSelection)
+	} else {
+		fmt.Println("Спасибо, было весело!")
+	}
 }

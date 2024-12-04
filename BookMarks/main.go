@@ -34,7 +34,7 @@ func getMenu() int {
 	fmt.Println("1. Посмотреть закладки")
 	fmt.Println("2. Добавить закладку")
 	fmt.Println("3. Удалить закладку")
-	fmt.Println("4. Выход\n")
+	fmt.Println("4. Выход")
 	fmt.Scan(&input)
 
 	return input

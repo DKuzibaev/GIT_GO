@@ -5,10 +5,9 @@ import "fmt"
 // Добавил alias для получаемого и возвращаемого типа! Type Alias позволяет создавать новые типы (алиасы)
 type bookmarksMap = map[string]string
 
-//Глобальная переменная для хранения данных
-var database = bookmarksMap{}
-
 func main() {
+	//Переменная для хранения данных
+	var database = bookmarksMap{}
 	fmt.Println("Приложение для закладок URL адресов")
 	// Добавил lable Menu: для остановки цикла! Лейблы обозначают циклы или блоки кода, позволяя точно указать, из какой части кода следует выйти.
 Menu:
@@ -40,15 +39,13 @@ func getMenu() int {
 	return input
 }
 
-func addToDB(db bookmarksMap) bookmarksMap {
+func addToDB(db bookmarksMap) {
 	var key, val string
 	fmt.Println("Введите название: ")
 	fmt.Scan(&key)
 	fmt.Println("Введите адрес: ")
 	fmt.Scan(&val)
 	db[key] = val
-
-	return db
 }
 
 func showDBItems(db bookmarksMap) {

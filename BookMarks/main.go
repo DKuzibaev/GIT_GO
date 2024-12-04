@@ -2,10 +2,15 @@ package main
 
 import "fmt"
 
-var database = map[string]string{}
+// Добавил alias для получаемого и возвращаемого типа!
+type bookmarksMap = map[string]string
+
+//Глобальная переменная для хранения данных
+var database = bookmarksMap{}
 
 func main() {
 	fmt.Println("Приложение для закладок URL адресов\n")
+	// Добавил lable Menu: для остановки цикла!
 Menu:
 	for {
 		variant := getMenu()
@@ -29,13 +34,13 @@ func getMenu() int {
 	fmt.Println("1. Посмотреть закладки")
 	fmt.Println("2. Добавить закладку")
 	fmt.Println("3. Удалить закладку")
-	fmt.Println("4. Выход")
+	fmt.Println("4. Выход\n")
 	fmt.Scan(&input)
 
 	return input
 }
 
-func addToDB(db map[string]string) map[string]string {
+func addToDB(db bookmarksMap) bookmarksMap {
 	var key, val string
 	fmt.Println("Введите название: ")
 	fmt.Scan(&key)
@@ -46,7 +51,7 @@ func addToDB(db map[string]string) map[string]string {
 	return db
 }
 
-func showDBItems(db map[string]string) {
+func showDBItems(db bookmarksMap) {
 	if len(db) == 0 {
 		fmt.Println("Тут пусто...")
 	}
@@ -55,7 +60,7 @@ func showDBItems(db map[string]string) {
 	}
 }
 
-func removeFromDB(db map[string]string) {
+func removeFromDB(db bookmarksMap) {
 	var id string
 	fmt.Println("Введите название")
 	fmt.Scan(&id)

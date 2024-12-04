@@ -9,7 +9,7 @@ type bookmarksMap = map[string]string
 var database = bookmarksMap{}
 
 func main() {
-	fmt.Println("Приложение для закладок URL адресов\n")
+	fmt.Println("Приложение для закладок URL адресов")
 	// Добавил lable Menu: для остановки цикла!
 Menu:
 	for {

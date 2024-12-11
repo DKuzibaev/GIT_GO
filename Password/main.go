@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	fmt.Println("___Менеджер паролей___")
+	fmt.Println("___Менеджер паролей___\n")
 
 Menu:
 	for {
@@ -63,7 +63,7 @@ func getMenu() int {
 	fmt.Println("2. Найти аккаунт")
 	fmt.Println("3. Удалить аккаунт")
 	fmt.Println("4. Выход")
-	fmt.Scan(&input)
+	fmt.Scanln(&input)
 
 	return input
 }

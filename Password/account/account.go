@@ -1,6 +1,7 @@
 package account
 
 import (
+	"encoding/json"
 	"errors"
 	"math/rand"
 	"net/url"
@@ -14,23 +15,36 @@ var letterRunse = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ12
 
 // struct - это по сути своей класс в других яп
 type Account struct {
-	login    string
-	password string
-	url      string
+	Login     string    `json:"login"`
+	Password  string    `json:"password"`
+	Url       string    `json:"URL"`
+	CreatedAt time.Time `json:"createdAt"`
+	UpdatedAt time.Time `json:"updatedAt"`
 }
 
 // Так выгдядит наследование в Go
-type AccountWithTimeStamp struct {
-	createdAt time.Time
-	updatedAt time.Time
-	Account
+// type AccountWithTimeStamp struct {
+// 	createdAt time.Time
+// 	updatedAt time.Time
+// 	Account
+// }
+
+// Метод для приобразования файла в Byte массив
+func (acc *Account) ToBytes() ([]byte, error) {
+	file, err := json.Marshal(acc)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return file, nil
 }
 
 // Это метод который принадлежит структуре account
 func (acc *Account) OutputPassword() {
-	color.Red("Ваш логин: %s", acc.login)
-	color.Green("Ваш пароль: %s", acc.password)
-	color.Blue("Ваш URL: %s", acc.url)
+	color.Red("Ваш логин: %s", acc.Login)
+	color.Green("Ваш пароль: %s", acc.Password)
+	color.Blue("Ваш URL: %s", acc.Url)
 	//fmt.Println(acc.login, acc.password, acc.url)
 }
 
@@ -41,11 +55,11 @@ func (acc *Account) generatePassword(n int) {
 	for i := range res {
 		res[i] = letterRunse[rand.Intn(len(letterRunse))]
 	}
-	acc.password = string(res)
+	acc.Password = string(res)
 }
 
 // Конструктор функции
-func NewAccountWithTimeStamp(log, pas, urlStr string) (*AccountWithTimeStamp, error) {
+func NewAccount(log, pas, urlStr string) (*Account, error) {
 	if log == "" {
 		return nil, errors.New("INVALID_LOGIN")
 	}
@@ -56,14 +70,12 @@ func NewAccountWithTimeStamp(log, pas, urlStr string) (*AccountWithTimeStamp, er
 		return nil, errors.New("INVALID_URL")
 	}
 	//Создание новой структуры
-	newAcc := &AccountWithTimeStamp{
-		createdAt: time.Now(),
-		updatedAt: time.Now(),
-		Account: Account{
-			login:    log,
-			password: pas,
-			url:      urlStr,
-		},
+	newAcc := &Account{
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
+		Login:     log,
+		Password:  pas,
+		Url:       urlStr,
 	}
 
 	if pas == "" {

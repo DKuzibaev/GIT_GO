@@ -1,7 +1,6 @@
 package account
 
 import (
-	"encoding/json"
 	"errors"
 	"math/rand"
 	"net/url"
@@ -28,17 +27,6 @@ type Account struct {
 // 	updatedAt time.Time
 // 	Account
 // }
-
-// Метод для приобразования файла в Byte массив
-func (acc *Account) ToBytes() ([]byte, error) {
-	file, err := json.Marshal(acc)
-
-	if err != nil {
-		return nil, err
-	}
-
-	return file, nil
-}
 
 // Это метод который принадлежит структуре account
 func (acc *Account) OutputPassword() {

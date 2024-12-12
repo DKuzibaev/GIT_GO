@@ -2,6 +2,7 @@ package account
 
 import (
 	"errors"
+	"fmt"
 	"math/rand"
 	"net/url"
 	"time"
@@ -29,11 +30,11 @@ type Account struct {
 // }
 
 // Это метод который принадлежит структуре account
-func (acc *Account) OutputPassword() {
-	color.Red("Ваш логин: %s", acc.Login)
+func (acc *Account) Output() {
+	color.Green("Ваш логин: %s", acc.Login)
 	color.Green("Ваш пароль: %s", acc.Password)
-	color.Blue("Ваш URL: %s", acc.Url)
-	//fmt.Println(acc.login, acc.password, acc.url)
+	color.Green("Ваш URL: %s", acc.Url)
+	fmt.Println("")
 }
 
 // Это метод создает новый пароль
